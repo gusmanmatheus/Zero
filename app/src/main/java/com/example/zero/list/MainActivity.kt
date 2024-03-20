@@ -38,7 +38,7 @@ class MainActivity : AppCompatActivity() {
     private fun clientsObserver() {
         viewModel.clients.observe(this) {
             adapter.setData(it)
-         }
+        }
     }
 
     private fun isOrderByNameObserver() {

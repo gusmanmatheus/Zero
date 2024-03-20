@@ -6,23 +6,21 @@ import com.example.zero.list.data.ClientRepository
 import com.example.zero.list.data.ClientRepositoryImpl
 import io.mockk.MockKAnnotations
 import io.mockk.every
- import io.mockk.impl.annotations.MockK
-import io.mockk.mockk
+import io.mockk.impl.annotations.MockK
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.Assertions
-import javax.sql.DataSource
 
 
 class ClientRepositoryImplTest {
     @MockK
-    private lateinit var mockDataSource :ClientDataSource
-    private lateinit var  clientRepository: ClientRepository
+    private lateinit var mockDataSource: ClientDataSource
+    private lateinit var clientRepository: ClientRepository
 
     @BeforeEach
     fun setUp() {
         MockKAnnotations.init(this)
-         clientRepository = ClientRepositoryImpl(mockDataSource)
+        clientRepository = ClientRepositoryImpl(mockDataSource)
     }
 
     @Test
@@ -50,7 +48,6 @@ class ClientRepositoryImplTest {
         every { mockDataSource.getClients() } returns mockClients
 
         val clients = clientRepository.getClient()
-        //in this case the list had been ordered when repository return this
         Assertions.assertEquals(2, clients.size)
         Assertions.assertEquals("Joao", clients[1].name)
         Assertions.assertEquals(Gender.MALE, clients[1].gender)
@@ -66,7 +63,6 @@ class ClientRepositoryImplTest {
         every { mockDataSource.getClients() } returns mockClients
 
         val clients = clientRepository.getClient()
-        //in this case the list had been ordered when repository return this
         Assertions.assertEquals(2, clients.size)
         Assertions.assertEquals("Joao", clients[1].name)
         Assertions.assertEquals(Gender.MALE, clients[1].gender)
