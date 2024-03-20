@@ -48,23 +48,6 @@ class MainViewModelTest {
     }
 
     @Test
-    fun `test multiples getClients`() {
-        val listOfClientMock = listOf(
-            Client("Marcos", MALE, 2),
-            Client("Carlos", MALE, 1),
-            Client("Amanda", FEMALE, 1)
-        )
-        every { mockRepository.getClient() } returns listOfClientMock
-        clientsMutableLiveData = mockk<Observer<List<Client>>>(relaxed = true)
-
-        viewModel.getClients()
-        viewModel.clients.observeForever(clientsMutableLiveData)
-
-        verify { clientsMutableLiveData.onChanged(listOfClientMock) }
-        assertEquals(mockRepository.getClient(), listOfClientMock)
-    }
-
-    @Test
     fun `getClientsOrdered sorts clients by name`() {
         val unsortedClients = listOf(Client("Maria", FEMALE, 1), Client("Ana", FEMALE, 2))
         every { mockRepository.getClient() } returns unsortedClients
@@ -102,7 +85,7 @@ class MainViewModelTest {
     }
 
     @Test
-    fun `test multiple clients`() {
+    fun `test multiple clients `() {
         val listOfClientsMock = listOf(
             Client("Marcos", MALE, 1),
             Client("Maria", FEMALE, 2)
